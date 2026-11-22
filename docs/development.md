@@ -9,9 +9,11 @@ project.
 ## Prerequisites
 
 GNU Make, git, Python 3.11 or newer (the org tooling `make check` fetches),
-and Docker for `make shell`. Nothing else until code lands; OMNeT++ and INET
-come in with the first code, once their image exists in
-swarm-routing/sim-containers.
+and either a running Docker daemon or Go for the licence-header gate that
+`make check` runs (`make headers`: the org's `check-headers.sh` runs the
+ci-tools image with Docker, else builds `cmd/check-headers` with Go). Docker
+also runs `make shell`. OMNeT++ and INET come in with the first code, once
+their image exists in swarm-routing/sim-containers.
 
 ## Get the code
 

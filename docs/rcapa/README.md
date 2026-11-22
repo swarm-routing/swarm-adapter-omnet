@@ -23,7 +23,7 @@ This page is the project's flow and its index.
 | Verified by | from the first release: the consumer's failing check on the new version against the old one, and this repository's own required checks |
 | Corrective action | from the first release: the fix with its test, then a patch release (CONTRIBUTING "Cutting a release") |
 | Preventive action | from the first release: the check that would have caught it before the release, added to CI |
-| Closes when | the fix is merged **and** a release of the channel above carries it |
+| Closes when | the fix is merged, a release of the channel above carries it, **and** the consumer that found it runs green on that release |
 
 ```mermaid
 sequenceDiagram
@@ -51,8 +51,9 @@ sequenceDiagram
 2. Copy [`_template.md`](_template.md) to `rcapa-<short-description>.md`
    (lowercase, hyphens: what breaks, not where it was found), and add its row
    to the index in the same pull request.
-3. The ticket stays open until the corrective action is merged **and a
-   release carries the fix**; record that release in the index.
+3. The ticket stays open until the corrective action is merged, **a
+   release carries the fix, and the consumer that found it runs green on
+   that release** (CONTRIBUTING "RCAPA"); record that release in the index.
 
 ## What an RCAPA answers
 
