@@ -1,0 +1,20 @@
+# org-sync configuration (swarm-routing/.github tools/org-sync).
+kind = "c-cpp"
+title = "swarm-adapter-omnet"
+dual = []
+
+[docs]
+arena_id = ""  # its id in swarm-routing.github.io site/hub/projects.json, once listed
+
+[settings]
+# GitHub settings as code: swarm-routing/.github tools/repo-settings (swarm-routing/.github#117).
+description = "swarm-adapter-omnet, the OMNeT++/INET adapter of swarm-core's ports, so a swarm-routing protocol's simulator-free core runs inside OMNeT++ as it does in ns-3 (planned, deferred: ROADMAP decisions 23 and 24; no code yet)."
+homepage = ""  # none until the site lists it (swarm-routing/swarm-routing.github.io site/hub/projects.json)
+topics = ["omnetpp", "inet", "swarm-intelligence", "routing-protocol", "manet", "network-simulation", "cpp23", "ports-and-adapters"]
+ruleset = "protocol"
+# Only checks that run on every PR today. Add the build and test checks
+# once their workflows exist and run on pull_request and merge_group.
+required_checks = ["check / org-sync", "headers / licence", "title / title", "review / coderabbit"]
+# Merge through a merge queue (swarm-routing/.github#130); every workflow behind a required
+# check also runs on merge_group.
+merge_queue = true
