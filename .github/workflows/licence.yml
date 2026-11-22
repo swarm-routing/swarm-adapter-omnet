@@ -1,0 +1,21 @@
+# Copyright (c) 2026 Daniel Joppi (https://github.com/swarm-routing)
+# SPDX-License-Identifier: GPL-2.0-only
+name: Licence
+
+# The whole repository is GPL-2.0-only (LICENSING.md): an adapter, like
+# swarm-adapter-ns3's ns-3 glue. No dual-licensed root and no core/ here.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  merge_group:  # the merge queue runs the required checks on each group (swarm-routing/.github#130)
+
+permissions:
+  contents: read
+
+jobs:
+  headers:
+    uses: swarm-routing/.github/.github/workflows/reusable-licence-check.yml@main
+    with:
+      dual-roots: ''
+      core-roots: ''
