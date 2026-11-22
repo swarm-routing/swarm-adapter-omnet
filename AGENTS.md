@@ -7,7 +7,7 @@ before changing anything. Org-wide conventions:
 
 ## What this repo is
 
-**Status: planned (deferred; swarm-routing/.github ROADMAP decisions 23 and 24).** No code yet: the plan is the epic here, swarm-routing/.github#674 (epic 6) and swarm-routing/.github#48. Nothing starts until the maintainer re-plans the simulator track (decision 23); OMNeT++ also waits for ns-3 and Linux parity (decision 8).
+**Status: planned (deferred; swarm-routing/.github ROADMAP decisions 23 and 24).** No code yet: the plan is #2, swarm-routing/.github#674 (epic 6) and swarm-routing/.github#48. Nothing starts until the maintainer re-plans the simulator track (decision 23); OMNeT++ also waits for ns-3 and Linux parity (decision 8).
 
 swarm-adapter-omnet, the OMNeT++/INET adapter of swarm-core's ports (swarm-routing/.github#672, layer 2): the in-process simulator adapter a protocol's simulator-free `core/` runs on inside OMNeT++, as swarm-routing/swarm-adapter-ns3 is for ns-3. Every in-process C++ simulator gets its own `swarm-adapter-<sim>` repository (decision 24); orchestration, statistics, launch configs and trace normalizers stay in swarm-routing/sim-tools, and CORE/EMANE and Shadow run swarm-routingd with no adapter repository. The whole repository is `GPL-2.0-only` ([`LICENSING.md`](LICENSING.md)), like swarm-adapter-ns3's ns-3 glue.
 
