@@ -8,7 +8,7 @@
 | Release | [![Licence: GPL-2.0-only](https://img.shields.io/badge/licence-GPL--2.0--only-blue)](LICENSING.md) |
 | Trust | [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/swarm-routing/swarm-adapter-omnet/badge)](https://scorecard.dev/viewer/?uri=github.com/swarm-routing/swarm-adapter-omnet) [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/17073/badge)](https://www.bestpractices.dev/projects/17073) |
 | Stack | [![C++23](https://img.shields.io/badge/C%2B%2B-23-blue?logo=cplusplus)](AGENTS.md) |
-| Community & docs | [![Open RCAPA](https://img.shields.io/github/issues/swarm-routing/swarm-adapter-omnet/rcapa?label=open%20RCAPA&color=blue)](https://github.com/swarm-routing/swarm-adapter-omnet/blob/main/docs/rcapa/README.md) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow)](https://www.conventionalcommits.org) |
+| Community & docs | [![Colony Arena: swarm-adapter-omnet](https://img.shields.io/badge/Colony%20Arena-project%20page-orange)](https://swarm-routing.github.io/projects/swarm-adapter-omnet/) [![Open RCAPA](https://img.shields.io/github/issues/swarm-routing/swarm-adapter-omnet/rcapa?label=open%20RCAPA&color=blue)](https://github.com/swarm-routing/swarm-adapter-omnet/blob/main/docs/rcapa/README.md) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow)](https://www.conventionalcommits.org) |
 <!-- org-sync:end badges -->
 
 swarm-adapter-omnet, the OMNeT++/INET adapter of swarm-core's ports
