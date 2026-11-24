@@ -46,6 +46,12 @@ check: lint test headers org-sync-check ## everything CI gates on
 
 ci: check ## exactly what CI runs
 
+# release.yml runs `make dist` (swarm-routing/.github reusable-release.yml):
+# the module's source tarball in dist/. Fails until the module exists (epic #2).
+.PHONY: dist
+dist: ## the release asset in dist/ (the OMNeT++/INET module's tarball)
+	@echo "make dist: no module yet (epic #2): nothing to release" >&2; exit 1
+
 # org-sync:begin org-tools
 # The org tooling (check-headers, org-sync): a shallow clone, refreshed to ORG_REF,
 # by default the template commit .github/org-sync.lock pins, as CI checks (#586).

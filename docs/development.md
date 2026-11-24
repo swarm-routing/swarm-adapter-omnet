@@ -13,7 +13,8 @@ and either a running Docker daemon or Go for the licence-header gate that
 `make check` runs (`make headers`: the org's `check-headers.sh` runs the
 ci-tools image with Docker, else builds `cmd/check-headers` with Go). Docker
 also runs `make shell`. OMNeT++ and INET come in with the first code, once
-their image exists in swarm-routing/sim-containers.
+their image exists in swarm-routing/sim-containers; the versions and the
+install steps are [install.md](install.md).
 
 ## Get the code
 
@@ -69,6 +70,7 @@ headers: `make headers`, the org's `check-headers` gate.
 | `scorecard.yml`, `bestpractices-evidence.yml` | OpenSSF Scorecard; best-practices evidence | no |
 | `settings-apply.yml`, `epics-changed.yml` | nudge the org's repo-settings and epic lists | no |
 | `security-autofix.yml` | the org's security-alert fix agent | no |
+| `release.yml` | the release (dispatched by the maintainer; a merged bump PR) | no |
 
 The required checks are the ones the `main` ruleset lists (`gh api
 repos/swarm-routing/swarm-adapter-omnet/rules/branches/main`), applied from
@@ -76,9 +78,14 @@ repos/swarm-routing/swarm-adapter-omnet/rules/branches/main`), applied from
 
 ## Release
 
-Nothing is released yet. A version is cut as
+Nothing is released yet. `.github/workflows/release.yml` calls the org's
+`reusable-release.yml` (Commitizen config `.cz.toml`, version in `VERSION`
+and `CITATION.cff`; `make dist` builds the asset, and fails until the module
+exists; `vcpkg-ports: swarm-adapter-omnet` bumps the module's port in
+swarm-routing/vcpkg-registry after publish). A version is cut on the
+maintainer's request only, as
 [CONTRIBUTING "Cutting a release"](https://github.com/swarm-routing/.github/blob/main/CONTRIBUTING.md#cutting-a-release)
-says, once a `release.yml` and a ladder in `docs/roadmap.md` exist.
+says, once its row in [roadmap.md](roadmap.md) is met.
 
 ## Troubleshooting
 
