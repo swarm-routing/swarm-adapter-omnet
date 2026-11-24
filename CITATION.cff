@@ -1,0 +1,50 @@
+# Citation File Format (https://citation-file-format.github.io), seeded by
+# swarm-routing/.github org-sync (`citation = true`; `citation_type` and
+# `[[references]]` in .github/org-sync.toml); the repository's own once
+# written. Commitizen keeps `version:` in step (`.cz.toml` version_files
+# "CITATION.cff:^version:"); swarm-routing/.github tools/zenodo reads the
+# concept DOI from `doi:` once the first release is archived on Zenodo.
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+title: "swarm-adapter-omnet: the OMNeT++/INET adapter of swarm-core"
+abstract: >-
+  swarm-adapter-omnet, the OMNeT++/INET adapter of swarm-core's ports
+  (https://doi.org/10.5281/zenodo.24476619): the OMNeT++ module a
+  swarm-routing protocol's simulator-free core runs on inside OMNeT++/INET,
+  as swarm-adapter-ns3 is for ns-3. It converts and carries out a core's
+  decisions (clock, randomness, timers, neighbours, link state, deferred
+  packets) and holds no routing logic.
+type: software
+authors:
+  - family-names: Joppi
+    given-names: Daniel Henrique
+    orcid: "https://orcid.org/0009-0009-6436-8174"
+version: "0.0.0"
+license: GPL-2.0-only
+repository-code: "https://github.com/swarm-routing/swarm-adapter-omnet"
+url: "https://github.com/swarm-routing/swarm-adapter-omnet"
+references:
+  - type: software
+    title: "swarm-core"
+    authors:
+      - family-names: "Joppi"
+        given-names: "Daniel Henrique"
+    year: 2026
+    publisher:
+      name: "Zenodo"
+    doi: "10.5281/zenodo.24476619"
+    notes: "The ports this repository is the OMNeT++/INET adapter of (swarm-routing/swarm-core), built on by release lock."
+  - type: conference-paper
+    title: "AN OVERVIEW OF THE OMNeT++ SIMULATION ENVIRONMENT"
+    authors:
+      - family-names: "Varga"
+        given-names: "András"
+      - family-names: "Hornig"
+        given-names: "Rudolf"
+    collection-title: "Proceedings of the First International ICST Conference on Simulation Tools and Techniques for Communications Networks and Systems"
+    collection-type: proceedings
+    year: 2008
+    publisher:
+      name: "ICST"
+    doi: "10.4108/icst.simutools2008.3027"
+    notes: "The simulator the adapter is written for."

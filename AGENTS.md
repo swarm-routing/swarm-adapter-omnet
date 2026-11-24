@@ -7,9 +7,9 @@ before changing anything. Org-wide conventions:
 
 ## What this repo is
 
-**Status: planned (deferred; swarm-routing/.github ROADMAP decisions 23 and 24).** No code yet: the plan is #2, swarm-routing/.github#674 (epic 6) and swarm-routing/.github#48. Nothing starts until the maintainer re-plans the simulator track (decision 23); OMNeT++ also waits for ns-3 and Linux parity (decision 8).
+**Status: set up, no code yet** (#24, swarm-routing/.github#881). Code lands by PR from the children of epic #2, in the order of [`docs/roadmap.md`](docs/roadmap.md); the simulator track's schedule is swarm-routing/.github ROADMAP decision 23's, and cross-simulator results stay qualitative (decision 8). There is no OMNeT++ CI image yet (its issue is in swarm-routing/sim-containers).
 
-swarm-adapter-omnet, the OMNeT++/INET adapter of swarm-core's ports (swarm-routing/.github#672, layer 2): the in-process simulator adapter a protocol's simulator-free `core/` runs on inside OMNeT++, as swarm-routing/swarm-adapter-ns3 is for ns-3. Every in-process C++ simulator gets its own `swarm-adapter-<sim>` repository (decision 24); orchestration, statistics, launch configs and trace normalizers stay in swarm-routing/sim-tools, and CORE/EMANE and Shadow run swarm-routingd with no adapter repository. The whole repository is `GPL-2.0-only` ([`LICENSING.md`](LICENSING.md)), like swarm-adapter-ns3's ns-3 glue.
+swarm-adapter-omnet, the OMNeT++/INET adapter of swarm-core's ports (swarm-routing/.github#672, layer 2): the in-process simulator adapter a protocol's simulator-free `core/` runs on inside OMNeT++, as swarm-routing/swarm-adapter-ns3 is for ns-3. It gives a core the clock, randomness, timers, neighbours and link state, the deferred packet queue and the control-packet send path, and carries out the core's decisions on INET; it decides nothing itself. Every in-process C++ simulator gets its own `swarm-adapter-<sim>` repository (decision 24); orchestration, statistics, launch configs and trace normalizers stay in swarm-routing/sim-tools, and CORE/EMANE and Shadow run swarm-routingd with no adapter repository. The whole repository is `GPL-2.0-only` ([`LICENSING.md`](LICENSING.md)), like swarm-adapter-ns3's ns-3 glue. Install and the supported OMNeT++/INET versions: [`docs/install.md`](docs/install.md).
 
 ## Build & verify
 
@@ -83,6 +83,37 @@ Org-wide (1–9), then this repo's own.
 9. **Nothing shipped depends on `.claude/`.** Skills hold procedures; scripts
    that anything shipped needs live in `tools/` (AntHocNet ADR-0014).
 <!-- org-sync:end org-rules -->
+10. **No routing logic here: the adapter converts and carries out.** It turns
+    OMNeT++/INET events (a packet in, a link change, a timer firing) into the
+    calls swarm-core's ports define, and carries out what the core returns (a
+    `RouteDecision`: forward on this interface to this neighbour, defer,
+    drop; a control packet to send). It never picks a next hop, updates
+    pheromone or a link metric's meaning, or drops a packet the core did not
+    drop. A decision rule belongs in the protocol's own simulator-free core; one that two
+    protocols share goes to swarm-routing/swarm-core.
+11. **Built on swarm-core's ports, by release lock.** The ports and their
+    contracts are swarm-routing/swarm-core's, at the release `swarm-core.lock`
+    names (ROADMAP decision 13), as in swarm-adapter-ns3. No core directory and
+    no primitive of our own here; a port this adapter needs and swarm-core
+    lacks is an issue there, never a local addition. Only the GPL module
+    includes OMNeT++ or INET headers; nothing here flows back into a
+    dual-licensed core (golden rules 1 and 2).
+12. **Pinned simulator, seeded randomness.** The module builds against the
+    OMNeT++ and INET releases [`docs/install.md`](docs/install.md) lists; a
+    version change is one PR that moves the pin, install.md and the CI image
+    together. The core's RNG port reads OMNeT++'s seeded streams
+    (`getRNG()`, the run's `seed-set`), its clock reads `simTime()`; never
+    wall-clock time or libc `rand()` (golden rule 5). A workaround for an
+    OMNeT++ or INET bug links its RCAPA ID (docs/install.md "Known simulator
+    bugs").
+13. **Every glue change carries a test** in `test/` (AntHocNet golden rule 7,
+    swarm-adapter-ns3 rule 13); a port's contract test lives with the port in
+    swarm-routing/swarm-core.
+14. **Downstream API stability.** Protocols build their OMNeT++ arm against
+    `main` or a release: a breaking API change lands with the downstream fixes
+    or an issue in each consumer, and follows swarm-adapter-ns3's
+    [`docs/api-policy.md`](https://github.com/swarm-routing/swarm-adapter-ns3/blob/main/docs/api-policy.md)
+    until this repository writes its own (before v1.0.0).
 
 ## Conventions
 
@@ -318,5 +349,9 @@ chat, not the record.
 | You want to… | Go to |
 |--------------|-------|
 | The org's invariants, labels, issue shape | [`swarm-routing/.github` CONTRIBUTING.md](https://github.com/swarm-routing/.github/blob/main/CONTRIBUTING.md) |
+| Install, the supported OMNeT++/INET versions, known simulator bugs | [`docs/install.md`](docs/install.md) |
+| The release ladder and what each release must show | [`docs/roadmap.md`](docs/roadmap.md) |
+| Which paths are which licence | [`LICENSING.md`](LICENSING.md) |
+| The ns-3 adapter of the same ports (the model) | [swarm-routing/swarm-adapter-ns3](https://github.com/swarm-routing/swarm-adapter-ns3) (`model/swarm-routing-base.h`, `docs/api-policy.md`) |
 | Record an architecture decision | [`docs/adr/`](docs/adr/) (`0000-template.md`) |
 | Pick up open work | this repo's issues — highest open `priority:P*` first; newest open `handoff` issue for work in flight |
