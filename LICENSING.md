@@ -35,7 +35,8 @@ MIT option). Each source file states its licence in its
   sources and the release tarball of them, never OMNeT++ or INET. Whether
   the OMNeT++ licence lets the org publish a container image with it built in
   is an open question, settled before any image ships
-  (swarm-routing/sim-containers#265, the OMNeT++/INET CI image).
+  ([swarm-routing/sim-containers#265](https://github.com/swarm-routing/sim-containers/issues/265),
+  the OMNeT++/INET CI image).
 - **The licence boundary only goes one way** (golden rule 2). This module
   uses swarm-core's simulator-free ports and primitives (`core/`, `MIT OR
   GPL-2.0-only`, in [swarm-routing/swarm-core](https://github.com/swarm-routing/swarm-core))
