@@ -52,7 +52,7 @@ On Ubuntu 24.04:
 ```bash
 sudo apt-get update
 sudo apt-get install -y build-essential clang lld gdb bison flex perl \
-  python3 python3-pip python3-venv libxml2-dev zlib1g-dev cmake git
+  python3 python3-dev python3-pip python3-venv libxml2-dev zlib1g-dev cmake git
 ```
 
 ### OMNeT++
@@ -65,11 +65,13 @@ python3 -m pip install -r python/requirements.txt
 . ./setenv
 ./configure WITH_QTENV=no WITH_OSG=no   # headless; drop both for the GUI
 make -j"$(nproc)"
+export OMNETPP_ROOT="$PWD"   # OMNeT++'s setenv does not export it; the adapter's build reads it
 ```
 
-[opp_env](https://github.com/omnetpp/opp_env) (`opp_env install
-omnetpp-6.5.0 inet-4.6.0`) installs the same pair in one step and is a
-supported alternative.
+[opp_env](https://github.com/omnetpp/opp_env) is a supported alternative.
+In an empty directory, run `opp_env init`, then
+`opp_env install omnetpp-6.5.0 inet-4.6.0`. The installed packages are usable
+only inside `opp_env shell` or `opp_env run`.
 
 ### INET
 
@@ -82,8 +84,9 @@ cd inet && . ./setenv && make makefiles && make -j"$(nproc)" MODE=release
 
 Not buildable yet: the first build PR (a child of epic #2) adds the module,
 `swarm-core.lock` and the `make build` / `make test` recipes, and writes the
-steps here. They will read `OMNETPP_ROOT` and `INET_ROOT` from the
-environment (the two `setenv` scripts above set them).
+steps here. They will read `OMNETPP_ROOT` (exported by hand after the
+OMNeT++ build above) and `INET_ROOT` (exported by INET's `setenv`) from the
+environment.
 
 ## Known simulator bugs
 
