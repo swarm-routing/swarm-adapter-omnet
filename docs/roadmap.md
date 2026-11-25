@@ -12,8 +12,10 @@ deliberate non-goals.
 
 ## How this plan is tracked
 
-Each issue a release gates carries a **`release:` label**, so every row of
-this plan is a live query. The implementation epic is #2.
+A board lists the open issues that carry its **`release:` label**. A gated
+issue without the label (see below) is not on it, so a release is checked
+against its row in the exit-criteria table, not against its board alone. The
+implementation epic is #2.
 
 | Release | Board |
 |---|---|
