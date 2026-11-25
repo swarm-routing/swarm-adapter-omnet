@@ -32,11 +32,22 @@ MIT option). Each source file states its licence in its
 - **The OMNeT++/INET module is GPL-2.0-only.** INET is LGPL-3.0 and
   OMNeT++ ships under its own Academic Public License; a simulation built
   with this module combines them. This repository distributes only its own
-  sources and the release tarball of them, never OMNeT++ or INET. Whether
-  the OMNeT++ licence lets the org publish a container image with it built in
-  is an open question, settled before any image ships
-  ([swarm-routing/sim-containers#265](https://github.com/swarm-routing/sim-containers/issues/265),
-  the OMNeT++/INET CI image).
+  sources and the release tarball of them, never OMNeT++ or INET.
+- **OMNeT++ is under its Academic Public License 1.1** (`doc/License` in the
+  release tarball): noncommercial use only, with commercial,
+  government-funded, EU-funded and military research needing an OMNEST
+  licence (APL §1). The org may publish an image with OMNeT++ and INET built
+  in, provided the image carries their complete source trees and licence
+  texts (APL §2, §4(a); the ruling on
+  [swarm-routing/sim-containers#265](https://github.com/swarm-routing/sim-containers/issues/265#issuecomment-7149262447);
+  the image is [swarm-routing/sim-containers#268](https://github.com/swarm-routing/sim-containers/issues/268)).
+- **This module is never distributed in binary form together with
+  OMNeT++.** A binary linking GPL-2.0-only code with OMNeT++ cannot meet
+  both GPL-2.0 §6 ("no further restrictions") and APL §1 and §3(b) (the
+  whole under APL, noncommercial). So no image, prebuilt release binary or
+  binary cache contains this module built against OMNeT++. Source
+  distribution, local builds and CI jobs distribute no such binary and are
+  unaffected. Whether to keep this or relicense is #38.
 - **The licence boundary only goes one way** (golden rule 2). This module
   uses swarm-core's simulator-free ports and primitives (`core/`, `MIT OR
   GPL-2.0-only`, in [swarm-routing/swarm-core](https://github.com/swarm-routing/swarm-core))
