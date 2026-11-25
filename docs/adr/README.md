@@ -7,3 +7,4 @@ changes is superseded by a new ADR, not edited. Start from
 | ADR | Decision |
 |-----|----------|
 | [0001](0001-record-architecture-decisions.md) | Record architecture decisions |
+| [0002](0002-release-a-source-tarball-not-a-vcpkg-port.md) | Release a source tarball, not a vcpkg port |

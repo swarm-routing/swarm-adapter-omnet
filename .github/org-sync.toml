@@ -13,7 +13,7 @@ arena_id = "swarm-adapter-omnet"  # its id in swarm-routing.github.io site/hub/p
 
 [settings]
 # GitHub settings as code: swarm-routing/.github tools/repo-settings (swarm-routing/.github#117).
-description = "swarm-adapter-omnet, the OMNeT++/INET adapter of swarm-core's ports, so a swarm-routing protocol's simulator-free core runs inside OMNeT++ as it does in ns-3 (planned, deferred: ROADMAP decisions 23 and 24; no code yet)."
+description = "swarm-adapter-omnet, the OMNeT++/INET adapter of swarm-core's ports, so a swarm-routing protocol's simulator-free core runs inside OMNeT++/INET as it does in ns-3; no routing logic, built on swarm-core by release lock (set up; code lands from epic #2)."
 homepage = "https://swarm-routing.github.io/projects/swarm-adapter-omnet/"
 topics = ["omnetpp", "inet", "swarm-intelligence", "routing-protocol", "manet", "network-simulation", "cpp23", "ports-and-adapters"]
 ruleset = "protocol"

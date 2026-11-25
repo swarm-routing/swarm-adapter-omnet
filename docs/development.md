@@ -81,8 +81,9 @@ repos/swarm-routing/swarm-adapter-omnet/rules/branches/main`), applied from
 Nothing is released yet. `.github/workflows/release.yml` calls the org's
 `reusable-release.yml` (Commitizen config `.cz.toml`, version in `VERSION`
 and `CITATION.cff`; `make dist` builds the asset, and fails until the module
-exists; `vcpkg-ports: swarm-adapter-omnet` bumps the module's port in
-swarm-routing/vcpkg-registry after publish). A version is cut on the
+exists). A release is the module's source tarball with checksums, an SBOM
+and signed provenance; there is no vcpkg port
+([ADR 0002](adr/0002-release-a-source-tarball-not-a-vcpkg-port.md)). A version is cut on the
 maintainer's request only, as
 [CONTRIBUTING "Cutting a release"](https://github.com/swarm-routing/.github/blob/main/CONTRIBUTING.md#cutting-a-release)
 says, once its row in [roadmap.md](roadmap.md) is met.
