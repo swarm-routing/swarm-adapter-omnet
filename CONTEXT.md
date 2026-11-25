@@ -11,8 +11,10 @@ The org templates, LICENSING.md, CITATION.cff, the release ladder
 ([docs/roadmap.md](docs/roadmap.md)), the install guide
 ([docs/install.md](docs/install.md)) and `release.yml` are in place. The
 implementation is epic #2; its v0.1.0 children carry `release:v0.1.0`.
-The first code PR needs an OMNeT++/INET CI image from
-swarm-routing/sim-containers, which does not exist yet.
+The first code PR needs the OMNeT++ 6.5.0 / INET 4.7.0 CI image from
+swarm-routing/sim-containers#268, which is not published yet. Its licence was
+settled on swarm-routing/sim-containers#265: publishing is allowed with the
+full source trees inside the image.
 
 The model is swarm-routing/swarm-adapter-ns3: its `SwarmRoutingBase` is what
 the ns-3 side gives a core, and this adapter gives a core the same on INET.
@@ -31,9 +33,8 @@ the ns-3 side gives a core, and this adapter gives a core the same on INET.
 
 ## Open questions
 
-- Whether OMNeT++'s licence (Academic Public License) lets the org publish a
-  container image with OMNeT++ built in (epic #2; the sim-containers image
-  issue).
+- Keep this module GPL-2.0-only and ship source only, or relicense it so a
+  binary combined with OMNeT++ (APL) can be distributed (#38).
 - Which INET hook the adapter uses for deferred packets (INET's netfilter
   hooks, as INET's own MANET routing protocols do, is the likely answer); the
   first port PR decides and records it in an ADR.

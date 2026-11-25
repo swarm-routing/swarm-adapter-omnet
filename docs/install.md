@@ -13,21 +13,36 @@ pin, this table and the CI image together.
 
 | OMNeT++ | INET | swarm-core | Status |
 |---------|------|------------|--------|
-| 6.5.0 (October 2026) | 4.6.0 (February 2026) | the release `swarm-core.lock` names | **target of v0.1.0**: the pair the first build PR pins and CI runs |
-| 6.2.x – 6.4.x | 4.6.0 | same | not tested: INET 4.6 requires OMNeT++ 6.2 or later; may build, no promise |
+| 6.5.0 (October 2026) | 4.7.0 (July 2026) | the release `swarm-core.lock` names | **target of v0.1.0**: the pair the first build PR pins and CI runs |
+| 6.4.x | 4.7.0 | same | not tested: INET 4.7 requires OMNeT++ 6.4 or later; may build, no promise |
+| 6.2.x – 6.5.x | 4.6.x | same | not tested: INET 4.6 requires OMNeT++ 6.2 or later; may build, no promise |
 | 6.1.x and older | 4.5.x and older | | not supported |
 
 Release sources: OMNeT++
 [tags](https://github.com/omnetpp/omnetpp/tags) and
 [omnetpp.org/download](https://omnetpp.org/download/); INET
 [tags](https://github.com/inet-framework/inet/tags) and its
-[WHATSNEW](https://github.com/inet-framework/inet/blob/v4.6.0/WHATSNEW)
+[WHATSNEW](https://github.com/inet-framework/inet/blob/v4.7.0/WHATSNEW)
 (the OMNeT++ version each INET release requires).
+
+## Licences
+
+OMNeT++ is under its **Academic Public License 1.1**
+(`doc/License` in the release tarball). It permits use "for noncommercial
+purposes, including teaching and academic research". Commercial use,
+"joint research with a commercial entity, government-funded, EU-funded,
+military or similar research projects" need an OMNEST licence
+(www.omnest.com). INET is LGPL-3.0-or-later. Check that your use is
+noncommercial under APL §1 before you install OMNeT++. How this bounds what
+the org distributes: [LICENSING.md](../LICENSING.md),
+[swarm-routing/sim-containers#265](https://github.com/swarm-routing/sim-containers/issues/265).
 
 ## Linux
 
 Ubuntu 24.04 LTS (x86_64) is the platform CI will run on, through the
-OMNeT++/INET image in swarm-routing/sim-containers once it exists. Other
+OMNeT++/INET image `ghcr.io/swarm-routing/omnetpp-dev:6.5.0-inet4.7.0`
+once it is published
+([swarm-routing/sim-containers#268](https://github.com/swarm-routing/sim-containers/issues/268)). Other
 recent distributions work if the tools below are new enough; macOS and
 Windows are not supported by this repository (OMNeT++ itself supports them).
 
@@ -70,13 +85,13 @@ export OMNETPP_ROOT="$PWD"   # OMNeT++'s setenv does not export it; the adapter'
 
 [opp_env](https://github.com/omnetpp/opp_env) is a supported alternative.
 In an empty directory, run `opp_env init`, then
-`opp_env install omnetpp-6.5.0 inet-4.6.0`. The installed packages are usable
+`opp_env install omnetpp-6.5.0 inet-4.7.0`. The installed packages are usable
 only inside `opp_env shell` or `opp_env run`.
 
 ### INET
 
 ```bash
-git clone --branch v4.6.0 --depth 1 https://github.com/inet-framework/inet.git
+git clone --branch v4.7.0 --depth 1 https://github.com/inet-framework/inet.git
 cd inet && . ./setenv && make makefiles && make -j"$(nproc)" MODE=release
 ```
 
@@ -102,10 +117,16 @@ and are linked from the row.
 
 Known incompatibilities that are not bugs:
 
-- **INET 4.6's clock model** (WHATSNEW "Clock model refinement"): a clock's
-  nominal tick interval must now be configured, it no longer defaults to the
-  simulation time resolution. The adapter's clock port reads `simTime()`, not
-  an INET clock, so it is unaffected; an example network that adds INET clocks
-  must set the interval.
-- **INET 4.6 requires OMNeT++ 6.2 or later**; older OMNeT++ releases do not
-  build it.
+- **INET 4.6's clock model**, kept in 4.7 (WHATSNEW "Clock model
+  refinement"): a clock's nominal tick interval must now be configured, it no
+  longer defaults to the simulation time resolution. The adapter's clock port
+  reads `simTime()`, not an INET clock, so it is unaffected; an example
+  network that adds INET clocks must set the interval.
+- **INET 4.7's RNG grouping** (WHATSNEW "RNG grouping"): the new
+  `GroupedRngManager` shares RNGs per module (the default), per node or
+  network-wide, chosen by the `rng-grouping` option. The adapter's RNG port
+  must take its stream from one documented grouping, and the example
+  networks must set `rng-grouping` explicitly, so that a fixed seed keeps
+  giving byte-identical output (golden rule 5) whatever INET's default.
+- **INET 4.7 requires OMNeT++ 6.4 or later** (4.6 requires 6.2 or later);
+  older OMNeT++ releases do not build it.
