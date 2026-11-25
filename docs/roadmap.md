@@ -23,6 +23,11 @@ this plan is a live query. The implementation epic is #2.
 | all epics | [`epic`](https://github.com/swarm-routing/swarm-adapter-omnet/issues?q=is%3Aopen+label%3Aepic) |
 
 Only issues the ladder gates are labelled, one release label per issue.
+The maintainer lifted ROADMAP decision 23 for the setup and the skeleton
+only (2026-11-24, swarm-routing/.github#881). So `release:v0.1.0` labels just
+the skeleton (#26) and CI (#27) today. The rest of v0.1.0's exit criteria
+(the ports, the protocol run, the release asset: #28–#31) is still the row
+below. Those issues get the label when the simulator track is re-planned.
 Releases are cut on the maintainer's request only (CONTRIBUTING "Cutting a
 release"); `release.yml`'s ladder gate refuses a version with no row below.
 
@@ -47,7 +52,7 @@ Amber releases are planned and not yet shipped.
 
 | Release | Theme | Exit criteria |
 |---|---|---|
-| v0.1.0 | the module builds against a pinned OMNeT++ release and runs one protocol core | The OMNeT++/INET module builds against the pair [install.md](install.md) pins (OMNeT++ 6.5.0, INET 4.6.0) and the swarm-core release `swarm-core.lock` names; CI builds and tests it on the OMNeT++/INET image from swarm-routing/sim-containers, and its build and test checks are required (`[settings]`); the clock, RNG, timer, deferred-queue, neighbour/link-state and control-send ports are carried out on INET, each with a glue test; one protocol core (AntHocNet's) runs in an example network and a fixed seed gives byte-identical output (golden rule 5); `make dist` builds the release tarball and the module's vcpkg port exists in swarm-routing/vcpkg-registry; docs/install.md describes the real steps. |
+| v0.1.0 | the module builds against a pinned OMNeT++ release and runs one protocol core | The OMNeT++/INET module builds against the pair [install.md](install.md) pins (OMNeT++ 6.5.0, INET 4.6.0) and the swarm-core release `swarm-core.lock` names; CI builds and tests it on the OMNeT++/INET image from swarm-routing/sim-containers, and its build and test checks are required (`[settings]`); the clock, RNG, timer, deferred-queue, neighbour/link-state and control-send ports are carried out on INET, each with a glue test; one protocol core (AntHocNet's) runs in an example network and a fixed seed gives byte-identical output (golden rule 5); `make dist` builds the release tarball (no vcpkg port: [ADR 0002](adr/0002-release-a-source-tarball-not-a-vcpkg-port.md)); docs/install.md describes the real steps. |
 | v0.2.0 (proposed) | adapter complete, side by side with ns-3 | Every port swarm-core defines at the locked release is carried out; a second protocol core runs; a sim-tools run of the same scenario on ns-3 and OMNeT++ is recorded, labelled qualitative (decision 8). |
 | v1.0.0 (proposed) | API frozen | This repository's own `docs/api-policy.md` (after swarm-adapter-ns3's) and an API record checked in CI; the downstream protocols build their OMNeT++ arm against it. |
 
