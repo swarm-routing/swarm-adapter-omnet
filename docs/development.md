@@ -83,7 +83,10 @@ Nothing is released yet. `.github/workflows/release.yml` calls the org's
 and `CITATION.cff`; `make dist` builds the asset, and fails until the module
 exists). A release is the module's source tarball with checksums, an SBOM
 and signed provenance; there is no vcpkg port
-([ADR 0002](adr/0002-release-a-source-tarball-not-a-vcpkg-port.md)). A version is cut on the
+([ADR 0002](adr/0002-release-a-source-tarball-not-a-vcpkg-port.md)). The
+workflow archives each published release on Zenodo (`zenodo: true`). That
+needs the `ZENODO_TOKEN` secret in the `release` environment, and Zenodo's
+GitHub integration must stay off for this repository. A version is cut on the
 maintainer's request only, as
 [CONTRIBUTING "Cutting a release"](https://github.com/swarm-routing/.github/blob/main/CONTRIBUTING.md#cutting-a-release)
 says, once its row in [roadmap.md](roadmap.md) is met.
